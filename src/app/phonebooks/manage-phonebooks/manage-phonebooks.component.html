@@ -1,0 +1,59 @@
+<div class="container mt-2 mb-5 py-md-2">
+  <div class="row">
+    <div class="col-md-6 col-lg-4 mb-3">
+      <form *ngIf="phonebookForm" (submit)="addPhonebook(phonebookForm)" [formGroup]="phonebookForm" class="p-3 card">
+        <h4 class="text-dark">
+          Add a new phonebook
+        </h4>
+        <div class="row">
+          <div class="col-12">
+            <div class="mb-3 pb-1">
+              <label class="form-label">Name*</label>
+              <input
+                type="text"
+                class="form-control py-2"
+                formControlName="name"
+                placeholder="Name"
+              />
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="mb-3 pb-1">
+              <label class="form-label">Description*</label>
+              <input
+                type="text"
+                class="form-control py-2"
+                formControlName="description"
+                placeholder="Description"
+              />
+            </div>
+          </div>
+          <div class="col-12">
+              <button type="submit" class="btn btn-outline-dark d-flex align-items-center" *ngIf="!loading">
+                <i class="fas fa-plus me-2"></i> Add Phonebook
+              </button>
+              <button class="btn btn-outline-dark" type="button" *ngIf="loading">
+                <span
+                  class="spinner-border spinner-border-sm"
+                  role="status"
+                  aria-hidden="true"
+                ></span>
+              </button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="col-md-6 col-lg-8">
+      <div class="row">
+        <div class="col-12 col-lg-6 mb-3" *ngFor="let phonebook of phonebooks">
+          <app-phonebook [phonebook]="phonebook" (updated)="getPhoneBooks()"></app-phonebook>
+        </div>
+        <div class="col-12">
+          <p class="note note-info" *ngIf="phonebooks?.length === 0">
+            You don't have any phonebooks, please add one or more.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
